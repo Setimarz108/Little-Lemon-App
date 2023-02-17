@@ -1,15 +1,17 @@
 import React from 'react'
-import { Stack,Box,} from '@chakra-ui/react'
+import { HStack,Box,Flex} from '@chakra-ui/react'
 
 function Nav(props) {
 
   return (
     <nav>
-        <Box bg="gray.200" p={4}>
-      <Stack direction="row" spacing={4}>
+        <Flex   alignItems='center' gap='2'>
+                  
+      <HStack direction="row" spacing={100} w={"100%"}>
         {props.children}
-      </Stack>
-    </Box>
+      </HStack>
+   
+    </Flex>
     </nav>
   )
 }
