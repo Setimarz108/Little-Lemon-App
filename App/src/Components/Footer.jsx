@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer>
       <Container backgroundColor={"#495E57"}>
-        <HStack justifyContent={"space-between"}>
+        <HStack justifyContent={"space-between"} margin={"auto"} width={"100%"}>
           <VStack>
             <Image src="./src/assets/logo.png" alt="Logo" width={"10rem"} />
           </VStack>
