@@ -44,13 +44,47 @@ footer > div {
 }
 
 .Form{
-
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+   background-color: #495e57;
+ margin-left: 30%;
+ margin-right: 30%;
+ margin-bottom: 15%;
+ margin-top: 7%;
+ height: 100%;
+ color: white;
 }
 
 Input, textarea{
 
   background-color: white;
+  font-weight: bold;
   color: #495e57;
+  width: 283px;
+  height: 50px;
+  padding: 0.5rem;
+}
+
+textarea{
+  max-height: 50rem;
+}
+
+Button{
+  width: 358px;
+  height: 50px;
+  background-color:#f4ce14;
+  color: black;
+  font-weight: bolder;
+  border-radius: 16px;
+   
+}
+
+Button:hover{
+
+  background-color: #495e57;
+  color: aliceblue;
 }
