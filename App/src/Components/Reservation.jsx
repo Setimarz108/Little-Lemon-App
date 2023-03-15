@@ -1,69 +1,120 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Flex, VStack } from "@chakra-ui/react";
+import { Formik, Field, Form } from "formik";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+  Button,
+  Flex,
+  Spacer,
+} from "@chakra-ui/react";
 
-function Reservation() {
+const ReservationForm = () => {
   return (
-    <>
-      <div className="Form">
-        <h1>Create a Reservation</h1>
-        <Formik
-          initialValues={{ name: "", guests: "", date: "", comment: "" }}
-          validate={(values) => {
-            const errors = {};
-            if (!values.name) {
-              errors.name = "Required";
-            }
-            if (!values.guests) {
-              errors.guests = "Required";
-            } else if (isNaN(values.guests)) {
-              errors.guests = "Invalid number";
-            }
-            if (!values.date) {
-              errors.date = "Required";
-            }
-            if (!values.comment) {
-              errors.comment = "Required";
-            }
-            return errors;
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
-          }}
-        >
-          {({ isSubmitting }) => (
-            <VStack>
-              
-              <Form>
-                <label htmlFor="name">Name:</label>
-                <Field type="text" name="name" />
-                <ErrorMessage name="name" component="div" />
+    <Formik
+      initialValues={{
+        name: "",
+        numOfGuests: 1,
+        date: "",
+        comments: "",
+      }}
+      validate={(values) => {
+        const errors = {};
+        if (!values.name) {
+          errors.name = "Required";
+        }
+        if (!values.numOfGuests) {
+          errors.numOfGuests = "Required";
+        }
+        if (!values.date) {
+          errors.date = "Required";
+        }
+        return errors;
+      }}
+      onSubmit={(values, actions) => {
+        console.log(values);
+        actions.setSubmitting(false);
+      }}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          <Field name="name">
+            {({ field, form }) => (
+              <FormControl
+                isInvalid={form.errors.name && form.touched.name}
+                mb="4"
+              >
+                <FormLabel htmlFor="name">Name</FormLabel>
+                <Input {...field} id="name" placeholder="Name" />
+              </FormControl>
+            )}
+          </Field>
 
-                <label htmlFor="guests">Number of guests:</label>
-                <Field type="text" name="guests" />
-                <ErrorMessage name="guests" component="div" />
+          <Field name="numOfGuests">
+            {({ field, form }) => (
+              <FormControl
+                isInvalid={
+                  form.errors.numOfGuests && form.touched.numOfGuests
+                }
+                mb="4"
+              >
+                <FormLabel htmlFor="numOfGuests">Number of Guests</FormLabel>
+                <Input
+                  {...field}
+                  id="numOfGuests"
+                  placeholder="Number of Guests"
+                  type="number"
+                  min="1"
+                />
+              </FormControl>
+            )}
+          </Field>
 
-                <label htmlFor="date">Date:</label>
-                <Field type="date" name="date" />
-                <ErrorMessage name="date" component="div" />
+          <Field name="date">
+            {({ field, form }) => (
+              <FormControl
+                isInvalid={form.errors.date && form.touched.date}
+                mb="4"
+              >
+                <FormLabel htmlFor="date">Date</FormLabel>
+                <Input {...field} id="date" placeholder="Date" type="date" />
+              </FormControl>
+            )}
+          </Field>
 
-                <label htmlFor="comment">Comments:</label>
-                <Field as="textarea" name="comment" />
-                <ErrorMessage name="comment" component="div" />
+          <Field name="comments">
+            {({ field, form }) => (
+              <FormControl
+                isInvalid={form.errors.comments && form.touched.comments}
+                mb="4"
+              >
+                <FormLabel htmlFor="comments">Comments</FormLabel>
+                <Textarea
+                  {...field}
+                  id="comments"
+                  placeholder="Comments"
+                  resize="none"
+                />
+              </FormControl>
+            )}
+          </Field>
 
-                <button type="submit" disabled={isSubmitting}>
-                  Submit
-                </button>
-              </Form>
-            </VStack>
-          )}
-        </Formik>
-      </div>
-    </>
+          <Flex>
+            <Spacer />
+            <Button
+              mt={4}
+              colorScheme="teal"
+              isLoading={isSubmitting}
+              type="submit"
+            >
+              Submit
+            </Button>
+          </Flex>
+        </Form>
+      )}
+    </Formik>
   );
-}
+};
 
-export default Reservation;
+export default ReservationForm;
